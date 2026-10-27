@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seoul Bites | Taste of Korea</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;450;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #ff334b;
+            --secondary-color: #2b1b17;
+            --accent-color: #ff9f1c;
+            --dark-bg: #121212;
+            --light-bg: #fdfbf7;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(43, 27, 23, 0.95) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #fff !important;
+            letter-spacing: 1px;
+        }
+
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            color: #ddd !important;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        /* Buttons */
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 51, 75, 0.4);
+        }
+
+        .btn-custom:hover {
+            background-color: #e61e38;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 51, 75, 0.6);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            padding: 10px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background-color: white;
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* Menu Cards */
+        .menu-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .menu-img-wrapper {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover .menu-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .price-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Culture/About Section */
+        .culture-section {
+            background-color: #f4efe6;
+            position: relative;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Reservation Section */
+        .reservation-section {
+            background: linear-gradient(rgba(43,27,23,0.9), rgba(43,27,23,0.9)), url('https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+        }
+
+        .form-control, .form-select {
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: rgba(255,255,255,0.15);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: none;
+        }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+        .form-select option {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a110f;
+            color: #aaa;
+            padding: 50px 0 20px;
+        }
+
+        footer h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.05);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Seoul<span>Bites</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#culture">Korean Culture</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reserve">Book Table</a></li>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a href="#reserve" class="btn btn-custom btn-sm px-4">Order Online</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="display-3">Discover the Authentic Taste of Korea</h1>
+                    <p class="lead">Experience the vibrant flavors, sizzling Korean BBQ, and time-honored traditional recipes right in your neighborhood.</p>
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <a href="#menu" class="btn btn-custom">Explore Menu</a>
+                        <a href="#reserve" class="btn btn-outline-custom">Book a Table</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container py-4">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop" alt="Korean Food Spread" class="img-fluid rounded-4 shadow-lg w-100">
+                        <div class="position-absolute bottom-0 start-0 bg-white p-4 rounded-4 shadow m-3 d-none d-sm-block" style="max-width: 250px;">
+                            <h4 class="h5 fw-bold text-dark mb-1">100% Authentic</h4>
+                            <p class="small text-muted mb-0">Imported spices and master chefs straight from Seoul.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <span class="text-uppercase fw-bold text-danger tracking-wider small">Our Story</span>
+                    <h2 class="display-5 fw-bold mb-4 mt-2">A Culinary Journey to the Heart of Seoul</h2>
+                    <p class="text-muted mb-4">At Seoul Bites, we believe food is more than sustenance—it's a cultural experience. Founded with a passion for genuine Korean hospitality, we bring the lively night markets of Myeongdong and the comforting homestyle cooking of Korean grandmothers to your table.</p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-danger fs-4 me-3"></i>
+                                <span class="fw-semibold">Fresh Daily Ingredients</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-danger fs-4 me-3"></i>
+                                <span class="fw-semibold">Traditional Fermentation</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-danger fs-4 me-3"></i>
+                                <span class="fw-semibold">Signature BBQ Grills</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-danger fs-4 me-3"></i>
+                                <span class="fw-semibold">Handmade Banchan</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#menu" class="btn btn-outline-dark rounded-pill px-4 py-2">Discover Specialties</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5 bg-white">
+        <div class="container py-4">
+            <div class="text-center">
+                <span class="text-uppercase fw-bold text-danger tracking-wider small">Taste the Tradition</span>
+                <h2 class="section-title display-5">Our Signature Menu</h2>
+            </div>
+
+            <!-- Menu Filter Tabs -->
+            <ul class="nav nav-pills justify-content-center mb-5 gap-2" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill px-4 py-2 fw-semibold" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button">All Dishes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="pills-bbq-tab" data-bs-toggle="pill" data-bs-target="#pills-bbq" type="button">Korean BBQ</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="pills-mains-tab" data-bs-toggle="pill" data-bs-target="#pills-mains" type="button">Hot Mains</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="pills-snacks-tab" data-bs-toggle="pill" data-bs-target="#pills-snacks" type="button">Street Food</button>
+                </li>
+            </ul>
+
+            <!-- Menu Items Grid -->
+            <div class="row g-4">
+                <!-- Item 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1580651214613-f4b69d0449dd?q=80&w=600&auto=format&fit=crop" alt="Korean BBQ">
+                            <span class="price-tag">$24.99</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="h5 fw-bold mb-0">Galbi (Beef Short Ribs)</h3>
+                                <span class="badge bg-danger-subtle text-danger">BBQ</span>
+                            </div>
+                            <p class="text-muted small mb-3">Marinated prime beef short ribs grilled to smoky perfection at your table, served with fresh lettuce wraps.</p>
+                            <button class="btn btn-outline-danger btn-sm w-100 rounded-pill order-btn" data-item="Galbi">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1634895697274-c2c62c9748b5?q=80&w=600&auto=format&fit=crop" alt="Bibimbap">
+                            <span class="price-tag">$16.50</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="h5 fw-bold mb-0">Dolsot Bibimbap</h3>
+                                <span class="badge bg-warning-subtle text-warning-emphasis">Mains</span>
+                            </div>
+                            <p class="text-muted small mb-3">Hot stone bowl rice topped with seasoned vegetables, beef, fried egg, and spicy gochujang sauce.</p>
+                            <button class="btn btn-outline-danger btn-sm w-100 rounded-pill order-btn" data-item="Dolsot Bibimbap">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=600&auto=format&fit=crop" alt="Tteokbokki">
+                            <span class="price-tag">$12.00</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="h5 fw-bold mb-0">Spicy Tteokbokki</h3>
+                                <span class="badge bg-success-subtle text-success">Street Food</span>
+                            </div>
+                            <p class="text-muted small mb-3">Chewy rice cakes and fish cakes simmered in a sweet and fiery chili sauce with boiled egg and scallions.</p>
+                            <button class="btn btn-outline-danger btn-sm w-100 rounded-pill order-btn" data-item="Spicy Tteokbokki">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?q=80&w=600&auto=format&fit=crop" alt="Korean Fried Chicken">
+                            <span class="price-tag">$18.99</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="h5 fw-bold mb-0">Yangnyeom Chicken</h3>
+                                <span class="badge bg-success-subtle text-success">Street Food</span>
+                            </div>
+                            <p class="text-muted small mb-3">Crispy double-fried chicken wings glazed in a sticky, sweet-and-spicy garlic gochujang sauce.</p>
+                            <button class="btn btn-outline-danger btn-sm w-100 rounded-pill order-btn" data-item="Yangnyeom Chicken">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1605333396915-47ed6b68a0e2?q=80&w=600&auto=format&fit=crop" alt="Kimchi Jjigae">
+                            <span class="price-tag">$15.50</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="h5 fw-bold mb-0">Kimchi Jjigae</h3>
+                                <span class="badge bg-warning-subtle text-warning-emphasis">Mains</span>
+                            </div>
+                            <p class="text-muted small mb-3">Comforting and spicy stew made with aged kimchi, pork belly, tofu, and scallions served with white rice.</p>
+                            <button class="btn btn-outline-danger btn-sm w-100 rounded-pill order-btn" data-item="Kimchi Jjigae">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <div class="menu-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?q=80&w=600&auto=format&fit=crop" alt="Jajangmyeon">
+                            <span class="price-tag">$14.50</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="h5 fw-bold mb-0">Jajangmyeon</h3>
+                                <span class="badge bg-warning-subtle text-warning-emphasis">Mains</span>
+                            </div>
+                            <p class="text-muted small mb-3">Handmade noodles tossed in a rich, savory roasted black bean sauce with diced pork and vegetables.</p>
+                            <button class="btn btn-outline-danger btn-sm w-100 rounded-pill order-btn" data-item="Jajangmyeon">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="culture-section py-5">
+        <div class="container py-4">
+            <div class="text-center">
+                <span class="text-uppercase fw-bold text-danger tracking-wider small">Experience More</span>
+                <h2 class="section-title display-5">The Pillars of Korean Dining</h2>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-lg-4">
+                    <div class="feature-box text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-3">Banchan Culture</h3>
+                        <p class="text-muted mb-0">Every meal is accompanied by an array of complimentary side dishes like kimchi, pickled radishes, and seasoned sprouts designed to balance every bite.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-box text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-3">Communal BBQ</h3>
+                        <p class="text-muted mb-0">Korean barbecue is built on sharing. Grilled right at your table, meat is wrapped in crisp lettuce leaves with garlic, ssamjang, and shared with friends.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-box text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-3">Health & Harmony</h3>
+                        <p class="text-muted mb-0">Rooted in ancient Eastern philosophy, Korean food emphasizes balance—balancing colors, temperatures, and medicinal properties in every single dish.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation & Order Section -->
+    <section id="reserve" class="reservation-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <span class="text-uppercase fw-bold text-danger tracking-wider small">Join Us</span>
+                    <h2 class="display-5 fw-bold text-white mt-2">Reserve Your Table</h2>
+                    <p class="text-light opacity-75">Secure your spot for an unforgettable Korean feast or place an express takeaway order.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card bg-dark border-0 p-4 p-md-5 rounded-4 shadow-lg" style="background: rgba(18, 18, 18, 0.85) !important; backdrop-filter: blur(10px);">
+                        <form id="reservationForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-light small fw-semibold">Your Name</label>
+                                    <input type="text" class="form-control" placeholder="Kim Min-jun" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-light small fw-semibold">Phone Number</label>
+                                    <input type="tel" class="form-control" placeholder="+1 (555) 019-2834" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-light small fw-semibold">Date</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-light small fw-semibold">Time</label>
+                                    <input type="time" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-light small fw-semibold">Guests</label>
+                                    <select class="form-select">
+                                        <option value="1">1 Person</option>
+                                        <option value="2" selected>2 People</option>
+                                        <option value="4">4 People</option>
+                                        <option value="6">6+ People</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-custom w-100 py-3 fw-bold">Confirm Reservation</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <a class="navbar-brand fs-3 text-white mb-3 d-block" href="#">Seoul<span>Bites</span></a>
+                    <p class="small text-muted mb-4">Bringing authentic flavors, sizzling grills, and the warmth of Korean culture straight to your heart and table.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#home" class="text-decoration-none text-muted hover-white">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-decoration-none text-muted hover-white">About Us</a></li>
+                        <li class="mb-2"><a href="#menu" class="text-decoration-none text-muted hover-white">Our Menu</a></li>
+                        <li class="mb-2"><a href="#culture" class="text-decoration-none text-muted hover-white">Culture</a></li>
+                        <li><a href="#reserve" class="text-decoration-none text-muted hover-white">Reservations</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>Opening Hours</h5>
+                    <ul class="list-unstyled small text-muted">
+                        <li class="mb-2 d-flex justify-content-between"><span>Mon - Thu:</span> <span>11:00 AM - 10:00 PM</span></li>
+                        <li class="mb-2 d-flex justify-content-between"><span>Fri - Sat:</span> <span>11:00 AM - 11:30 PM</span></li>
+                        <li class="d-flex justify-content-between"><span>Sunday:</span> <span>12:00 PM - 9:30 PM</span></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Location</h5>
+                    <p class="small text-muted mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i> 742 Evergreen Terrace, Foodie District, Seoul City</p>
+                    <p class="small text-muted mb-0"><i class="fas fa-phone-alt text-danger me-2"></i> +1 (800) 555-KOREA</p>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25">
+            <div class="row text-center text-md-start py-3">
+                <div class="col-md-6 small text-muted">
+                    &copy; 2026 Seoul Bites. Crafted with passion by Frontend Developer.
+                </div>
+                <div class="col-md-6 text-md-end small text-muted">
+                    <a href="#" class="text-decoration-none text-muted me-3">Privacy Policy</a>
+                    <a href="#" class="text-decoration-none text-muted">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Interactive JS -->
+    <script>
+        // Simple alert simulation for ordering / reservations
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemName = this.getAttribute('data-item');
+                alert(`🎉 Added "${itemName}" to your order cart! Proceed to checkout or book a table to dine in.`);
+            });
+        });
+
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✨ Thank you! Your table reservation has been successfully received. We look forward to welcoming you!');
+            this.reset();
+        });
+
+        // Navbar shrink on scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 0';
+                navbar.style.backgroundColor = 'rgba(27, 17, 15, 0.98) !important';
+            } else {
+                navbar.style.padding = '15px 0';
+            }
+        });
+    </script>
+</body>
+</html>
